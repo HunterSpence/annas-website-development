@@ -1,55 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Лаб 10 - Обработчики событий JavaScript</title>
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ЛР-10 — Введение в JavaScript</title>
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <main>
-    <h1>💻 Демонстрация событий JavaScript</h1>
-    
-    <h2>Демонстрация обработчиков событий мыши</h2>
-    <div class="event-demo" id="eventDemo">
-      Нажмите, перемещайте мышь, держите кнопку мыши
-    </div>
-
-    <h2>Работа с текстовыми полями</h2>
-    <div class="container">
-      <div class="section">
-        <h3 style="margin-top: 0;">Поле 1</h3>
-        <textarea id="textarea1" placeholder="Введите текст здесь..."></textarea>
+  <header class="wrap">
+    <h1>Лабораторная работа 10 — Введение в JavaScript</h1>
+    <p class="muted">События: onclick, onmousedown, onmousemove, onmouseleave, onmouseup, onfocus, onblur</p>
+  </header>
+  <main class="wrap">
+    <section class="panel">
+      <!-- toolbar: 2 buttons, checkbox label, accent transfer button, spacer, 3 format buttons, create button -->
+      <div class="toolbar">
+        <button id="knopka1" class="btn">Кнопка 1</button>
+        <button id="knopka2" class="btn">Кнопка 2</button>
+        <label class="inline">
+          <input type="checkbox" id="chek_perenos">
+          Перенести из поля 1 в поле 2
+        </label>
+        <button id="btn_perenesti" class="btn btn-accent">Перенести текст</button>
+        <div class="spacer"></div>
+        <button id="btn_zhir" class="btn">Жирный</button>
+        <button id="btn_kursiv" class="btn">Курсив</button>
+        <button id="btn_podcherk" class="btn">Подчёркнутый</button>
+        <button id="btn_noviy" class="btn">Создать элемент</button>
       </div>
-      <div class="section">
-        <h3 style="margin-top: 0;">Поле 2</h3>
-        <textarea id="textarea2" placeholder="Результат появится здесь..."></textarea>
+      
+      <!-- grid: 2 columns, each with h2 + textarea -->
+      <div class="grid">
+        <div>
+          <h2>Поле 1</h2>
+          <textarea id="pole1" class="ta" placeholder="Введите текст в первое поле..."></textarea>
+        </div>
+        <div>
+          <h2>Поле 2</h2>
+          <textarea id="pole2" class="ta" placeholder="Введите текст во второе поле..."></textarea>
+        </div>
       </div>
-    </div>
-
-    <div class="checkbox-group">
-      <input type="checkbox" id="transferDir" checked>
-      <label for="transferDir">Копировать из Поля 1 → Поле 2</label>
-    </div>
-
-    <h2>Форматирование текста в HTML</h2>
-    <div class="buttons-group">
-      <button id="boldBtn">Жирный текст</button>
-      <button id="italicBtn">Курсив</button>
-      <button id="underlineBtn">Подчеркивание</button>
-    </div>
-
-    <h2>Динамическое создание элементов</h2>
-    <button id="createBtn" style="margin-bottom: 20px;">+ Создать новый элемент</button>
-    <div class="dynamic-container" id="dynamicContainer">
-      <p style="text-align: center; color: #999; margin: 0;">Элементы будут появляться здесь</p>
-    </div>
-
-    <h2>Журнал событий</h2>
-    <div class="event-log" id="eventLog"></div>
+      
+      <!-- HTML output -->
+      <div class="out">
+        <h2>Вывод как HTML (b / i / u)</h2>
+        <div id="vyvod_html" class="htmlOut">Здесь появится отформатированный текст из поля 1</div>
+      </div>
+      
+      <!-- Event log -->
+      <div class="logBlock">
+        <h2>Лог событий</h2>
+        <div id="log" class="log"></div>
+      </div>
+      
+      <!-- Dynamic area for mousemove/leave + created elements -->
+      <div id="zona" class="dynamicArea">
+        <h2>Зона для onmousemove / onmouseleave</h2>
+        <p class="muted">Наведите мышь на эту зону — координаты появятся в логе. Созданные элементы появятся здесь.</p>
+      </div>
+    </section>
   </main>
-
-  <script src="js/script.js"></script>
+  <footer class="wrap">
+    <p class="muted" style="text-align: center; margin-top: 2rem;">Студент: Корякина Анна</p>
+  </footer>
+  <script src="./js/script.js"></script>
 </body>
 </html>

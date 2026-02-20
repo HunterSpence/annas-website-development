@@ -1,60 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Лаб 10 - Обработчики событий JavaScript</title>
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ЛР-10 — Введение в JavaScript</title>
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>🎨 Обработчики событий JavaScript</h1>
-      <p>Интерактивное приложение для практики событий</p>
-    </header>
+  <header class="wrap">
+    <h1>Лабораторная работа 10 — Введение в JavaScript</h1>
+    <p class="muted">События: onclick, onmousedown, onmousemove, onmouseleave, onmouseup, onfocus, onblur</p>
+    <p class="muted">Студент: Корякина Анна</p>
+  </header>
+  <main class="wrap">
+    <section class="panel">
+      <!-- Панель инструментов -->
+      <div class="toolbar">
+        <button id="knopka1" class="btn">Кнопка 1</button>
+        <button id="knopka2" class="btn">Кнопка 2</button>
+        <label class="inline">
+          <input type="checkbox" id="chek_perenos" checked>
+          Поле 1 → Поле 2
+        </label>
+        <button id="btn_perenesti" class="btn btn-accent">Перенести</button>
+        <div class="spacer"></div>
+        <button id="btn_zhir" class="btn">Жирный</button>
+        <button id="btn_kursiv" class="btn">Курсив</button>
+        <button id="btn_podcherk" class="btn">Подчёркнутый</button>
+        <button id="btn_noviy" class="btn btn-accent">Создать элемент</button>
+      </div>
 
-    <main>
-      <section class="textareas-section">
-        <h2>Текстовые области</h2>
-        <div class="textarea-controls">
-          <label class="checkbox-label">
-            <input type="checkbox" id="transferToggle">
-            <span>Переносить текст слева направо</span>
-          </label>
+      <!-- Сетка с двумя текстовыми полями -->
+      <div class="grid">
+        <div>
+          <h2>Поле 1</h2>
+          <textarea id="pole1" class="ta" placeholder="Введите текст в Поле 1..."></textarea>
         </div>
-        
-        <div class="textarea-group">
-          <textarea id="textarea1" placeholder="Первая область..."></textarea>
-          <button id="transferBtn" class="transfer-btn">→ Перенести</button>
-          <textarea id="textarea2" placeholder="Вторая область..."></textarea>
+        <div>
+          <h2>Поле 2</h2>
+          <textarea id="pole2" class="ta" placeholder="Введите текст в Поле 2..."></textarea>
         </div>
-      </section>
+      </div>
 
-      <section class="formatting-section">
-        <h2>Форматирование текста</h2>
-        <div class="button-group">
-          <button id="boldBtn" class="format-btn bold-btn">Жирный</button>
-          <button id="italicBtn" class="format-btn italic-btn">Курсив</button>
-          <button id="underlineBtn" class="format-btn underline-btn">Подчёркнутый</button>
-        </div>
-        <div id="formattedText" class="formatted-text"></div>
-      </section>
+      <!-- Вывод HTML -->
+      <div class="out">
+        <h2>Вывод как HTML (b / i / u)</h2>
+        <div id="vyvod_html" class="htmlOut">Здесь будет отображаться форматированный текст из Поля 1</div>
+      </div>
 
-      <section class="dynamic-section">
-        <h2>Создание элементов</h2>
-        <button id="createBtn" class="create-btn">+ Создать новый элемент</button>
-        <div id="dynamicContainer" class="dynamic-container"></div>
-      </section>
-
-      <section class="events-section">
+      <!-- Лог событий -->
+      <div class="logBlock">
         <h2>Лог событий</h2>
-        <button id="clearLogBtn" class="clear-log-btn">Очистить</button>
-        <div id="eventLog" class="event-log"></div>
-      </section>
-    </main>
-  </div>
+        <div id="log" class="log"></div>
+      </div>
 
-  <script src="js/script.js"></script>
+      <!-- Динамическая зона -->
+      <div id="zona" class="dynamicArea">
+        <h2>Зона для onmousemove / onmouseleave</h2>
+        <p class="muted">Наведите курсор на эту область или нажмите "Создать элемент"</p>
+      </div>
+    </section>
+  </main>
+  <script src="./js/script.js"></script>
 </body>
 </html>

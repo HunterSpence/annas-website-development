@@ -1,189 +1,211 @@
+:root {
+  --bg: #fff1f2;
+  --card: #ffffff;
+  --text: #1c0a0d;
+  --muted: #6b4050;
+  --btn: #e8d0d6;
+  --btnHover: #ddbed8;
+  --btnActive: #d2aec8;
+  --field: #f5e0e5;
+  --accent: #e11d48;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background-color: #ffffff;
-  color: #1a1a1a;
-  font-weight: 600;
-  padding: 0;
-  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  padding: 1rem;
 }
 
-main {
-  max-width: 1200px;
+.wrap {
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 40px 20px;
+}
+
+.panel {
+  background: var(--card);
+  padding: 2rem;
+  margin-top: 1rem;
 }
 
 h1 {
-  font-size: 2.5em;
-  font-weight: 900;
-  color: #2563eb;
-  margin: 0 0 30px 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  margin: 0 0 0.5rem 0;
 }
 
 h2 {
-  font-size: 1.8em;
-  font-weight: 800;
-  color: #1a1a1a;
-  margin: 30px 0 20px 0;
-  border-bottom: 3px solid #2563eb;
-  padding-bottom: 10px;
+  font-size: 1.25rem;
+  margin: 1.5rem 0 0.75rem 0;
 }
 
-.container {
+.muted {
+  color: var(--muted);
+  margin: 0;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.btn {
+  padding: 10px 14px;
+  border: none;
+  background: var(--btn);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+
+.btn:hover {
+  background: var(--btnHover);
+}
+
+.btn:active {
+  background: var(--btnActive);
+}
+
+.btn-accent {
+  background: rgba(225, 29, 72, 0.15);
+  color: #9f1239;
+  font-weight: 600;
+}
+
+.btn-accent:hover {
+  background: rgba(225, 29, 72, 0.25);
+}
+
+.btn-accent:active {
+  background: rgba(225, 29, 72, 0.35);
+}
+
+.inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--btn);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+
+.inline:hover {
+  background: var(--btnHover);
+}
+
+.inline input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  margin-bottom: 40px;
+  gap: 2rem;
+}
+
+.ta {
+  width: 100%;
+  min-height: 160px;
+  padding: 12px;
+  background: var(--field);
+  border: none;
+  color: var(--text);
+  resize: vertical;
+  font-size: 0.95rem;
+  transition: box-shadow 0.2s;
+}
+
+.ta:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px rgba(225, 29, 72, 0.30);
+}
+
+.htmlOut,
+.log {
+  background: var(--field);
+  padding: 12px;
+  min-height: 80px;
+}
+
+.htmlOut {
+  margin-top: 0.5rem;
+}
+
+.log {
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 0.85rem;
+  min-height: 160px;
+  margin-top: 0.5rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.log > div {
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.log > div:first-child {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dynamicArea {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--field);
+  min-height: 200px;
+  position: relative;
+}
+
+.dynamicArea h2 {
+  margin-top: 0;
+}
+
+.dyn {
+  display: inline-block;
+  padding: 8px 12px;
+  margin: 4px;
+  background: var(--card);
+  border: 2px solid var(--accent);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.dyn:hover {
+  background: var(--btnHover);
+  transform: scale(1.05);
+}
+
+.dyn:active {
+  background: var(--btnActive);
+  transform: scale(0.98);
 }
 
 @media (max-width: 768px) {
-  .container {
+  .grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
-}
-
-.section {
-  background: #f9f9f9;
-  border: 2px solid #2563eb;
-  padding: 20px;
-}
-
-textarea {
-  width: 100%;
-  height: 150px;
-  padding: 12px;
-  font-size: 1em;
-  font-weight: 600;
-  border: 2px solid #2563eb;
-  background: white;
-  color: #1a1a1a;
-  resize: none;
-  font-family: 'Segoe UI', Arial, sans-serif;
-}
-
-textarea:focus {
-  outline: 3px solid #2563eb;
-  background-color: #e3f2fd;
-}
-
-.checkbox-group {
-  margin: 20px 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
-
-label {
-  font-size: 1.1em;
-  font-weight: 700;
-  color: #1a1a1a;
-  cursor: pointer;
-}
-
-button {
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 1em;
-  font-weight: 700;
-  cursor: pointer;
-  margin: 8px 8px 8px 0;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: all 0.2s ease;
-}
-
-button:hover {
-  background-color: #1d4ed8;
-  transform: translateY(-2px);
-}
-
-button:active {
-  background-color: #1e40af;
-  transform: translateY(0);
-}
-
-button:focus {
-  outline: 3px solid #2563eb;
-  outline-offset: 2px;
-}
-
-.buttons-group {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px;
-  margin: 20px 0;
-}
-
-.event-demo {
-  background: white;
-  border: 2px solid #2563eb;
-  padding: 15px;
-  margin: 15px 0;
-  font-weight: 700;
-  color: #2563eb;
-  text-align: center;
-  font-size: 1.2em;
-}
-
-.event-demo:hover {
-  background-color: #e3f2fd;
-}
-
-.event-log {
-  background: #1a1a1a;
-  color: #2563eb;
-  border: 2px solid #2563eb;
-  padding: 20px;
-  height: 250px;
-  overflow-y: auto;
-  font-family: 'Courier New', monospace;
-  font-weight: 600;
-  font-size: 0.95em;
-}
-
-.log-entry {
-  margin: 5px 0;
-  padding: 5px;
-  border-left: 3px solid #2563eb;
-  padding-left: 10px;
-}
-
-.dynamic-container {
-  border: 2px solid #2563eb;
-  padding: 20px;
-  margin: 20px 0;
-  min-height: 100px;
-}
-
-.dynamic-element {
-  background-color: #2563eb;
-  color: white;
-  padding: 15px;
-  margin: 10px 0;
-  font-weight: 700;
-  text-align: center;
-}
-
-.dynamic-element button {
-  background-color: white;
-  color: #2563eb;
-  margin-top: 8px;
-}
-
-.dynamic-element button:hover {
-  background-color: #e3f2fd;
+  
+  .toolbar {
+    gap: 8px;
+  }
+  
+  .spacer {
+    display: none;
+  }
 }

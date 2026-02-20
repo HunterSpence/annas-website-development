@@ -1,189 +1,152 @@
-// Переменные состояния
-let eventCount = 0;
-let transferDirection = 'left-to-right';
-let dynamicCount = 0;
-
-// Инициализация
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('textarea1').addEventListener('input', handleTextareaInput);
-  document.getElementById('textarea2').addEventListener('input', handleTextareaInput);
-});
-
-// === События мыши ===
-
-function handleClick(event) {
-  logEvent('onclick', 'Кнопка нажата!');
-  event.target.style.transform = 'scale(0.95)';
-  setTimeout(() => {
-    event.target.style.transform = 'scale(1)';
-  }, 200);
+// Custom selector function
+function $(id) {
+  return document.getElementById(id);
 }
 
-function handleMouseDown(event) {
-  logEvent('onmousedown', 'Кнопка зажата');
-  event.target.style.backgroundColor = '#2d5016';
-  event.target.style.transform = 'scale(0.9)';
+// Log function with timestamp
+function zapisat_v_log(text) {
+  var log = $('log');
+  var zapis = document.createElement('div');
+  var vremya = new Date();
+  var chas = String(vremya.getHours()).padStart(2, '0');
+  var minuta = String(vremya.getMinutes()).padStart(2, '0');
+  var sekunda = String(vremya.getSeconds()).padStart(2, '0');
+  zapis.textContent = '[' + chas + ':' + minuta + ':' + sekunda + '] ' + text;
+  log.insertBefore(zapis, log.firstChild);
 }
 
-function handleMouseUp(event) {
-  logEvent('onmouseup', 'Кнопка отпущена');
-  event.target.style.backgroundColor = '';
-  event.target.style.transform = 'scale(1)';
+// HTML escape function
+function ekraniruy_html(s) {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
 
-function handleMouseMove(event) {
-  const x = event.offsetX;
-  const y = event.offsetY;
-  document.getElementById('mouseArea').textContent = `X: ${x}px, Y: ${y}px (onmousemove)`;
-}
+// Get all element references
+var knopka1 = $('knopka1');
+var knopka2 = $('knopka2');
+var chek_perenos = $('chek_perenos');
+var btn_perenesti = $('btn_perenesti');
+var btn_zhir = $('btn_zhir');
+var btn_kursiv = $('btn_kursiv');
+var btn_podcherk = $('btn_podcherk');
+var btn_noviy = $('btn_noviy');
+var pole1 = $('pole1');
+var pole2 = $('pole2');
+var vyvod_html = $('vyvod_html');
+var zona = $('zona');
 
-function handleMouseLeave(event) {
-  logEvent('onmouseleave', 'Мышь ушла из области');
-  document.getElementById('mouseArea').textContent = 'Наведи мышь сюда (onmousemove / onmouseleave)';
-  document.getElementById('mouseArea').style.backgroundColor = '#fff3cd';
-  setTimeout(() => {
-    document.getElementById('mouseArea').style.backgroundColor = 'white';
-  }, 500);
-}
+// Button click events
+knopka1.onclick = function() {
+  zapisat_v_log('Клик по Кнопка 1');
+};
 
-// === События фокуса ===
+knopka2.onclick = function() {
+  zapisat_v_log('Клик по Кнопка 2');
+};
 
-function handleFocus(event) {
-  logEvent('onfocus', 'Поле в фокусе');
-  event.target.style.backgroundColor = '#e8f5e9';
-}
+// Transfer button mousedown/mouseup
+btn_perenesti.onmousedown = function() {
+  zapisat_v_log('onmousedown: Перенести текст нажата');
+};
 
-function handleBlur(event) {
-  logEvent('onblur', 'Поле потеряло фокус');
-  event.target.style.backgroundColor = 'white';
-}
+btn_perenesti.onmouseup = function() {
+  zapisat_v_log('onmouseup: Перенести текст отпущена');
+};
 
-// === Передача текста ===
+// Focus/blur events for textareas
+pole1.onfocus = function() {
+  zapisat_v_log('onfocus: Поле 1 получило фокус');
+};
 
-function updateTransferDirection() {
-  const checkbox = document.getElementById('transferCheckbox');
-  const label = document.getElementById('transferLabel');
-  if (checkbox.checked) {
-    transferDirection = 'right-to-left';
-    label.textContent = 'Текст справа → налево';
+pole1.onblur = function() {
+  zapisat_v_log('onblur: Поле 1 потеряло фокус');
+};
+
+pole2.onfocus = function() {
+  zapisat_v_log('onfocus: Поле 2 получило фокус');
+};
+
+pole2.onblur = function() {
+  zapisat_v_log('onblur: Поле 2 потеряло фокус');
+};
+
+// Throttled mousemove in dynamic zone
+var posledneye_vremya_move = 0;
+zona.onmousemove = function(e) {
+  var teper = Date.now();
+  if (teper - posledneye_vremya_move >= 250) {
+    var x = e.offsetX;
+    var y = e.offsetY;
+    zapisat_v_log('onmousemove: x=' + x + ', y=' + y);
+    posledneye_vremya_move = teper;
+  }
+};
+
+zona.onmouseleave = function() {
+  zapisat_v_log('onmouseleave: курсор покинул зону');
+};
+
+// Transfer text between textareas
+btn_perenesti.onclick = function() {
+  if (chek_perenos.checked) {
+    pole2.value = pole1.value;
+    zapisat_v_log('Текст перенесён: Поле 1 → Поле 2');
   } else {
-    transferDirection = 'left-to-right';
-    label.textContent = 'Текст слева → направо';
+    pole1.value = pole2.value;
+    zapisat_v_log('Текст перенесён: Поле 2 → Поле 1');
   }
+};
+
+// HTML formatting function
+function pokazat_html(open, close, tip) {
+  var tekst = pole1.value;
+  var ekranirovanniy = ekraniruy_html(tekst);
+  var rezultat = open + ekranirovanniy + close;
+  vyvod_html.innerHTML = rezultat;
+  zapisat_v_log('Применено форматирование: ' + tip);
 }
 
-function handleTextareaInput(event) {
-  const textarea1 = document.getElementById('textarea1');
-  const textarea2 = document.getElementById('textarea2');
-  
-  if (transferDirection === 'left-to-right') {
-    if (event.target === textarea1) {
-      textarea2.value = textarea1.value;
-    }
-  } else {
-    if (event.target === textarea2) {
-      textarea1.value = textarea2.value;
-    }
-  }
-}
+// Format buttons
+btn_zhir.onclick = function() {
+  pokazat_html('<b>', '</b>', 'жирный');
+};
 
-function transferText() {
-  const textarea1 = document.getElementById('textarea1');
-  const textarea2 = document.getElementById('textarea2');
-  
-  if (transferDirection === 'left-to-right') {
-    textarea2.value = textarea1.value;
-  } else {
-    textarea1.value = textarea2.value;
-  }
-  
-  logEvent('onclick', 'Текст передан: ' + (transferDirection === 'left-to-right' ? '→' : '←'));
-}
+btn_kursiv.onclick = function() {
+  pokazat_html('<i>', '</i>', 'курсив');
+};
 
-// === Форматирование текста ===
+btn_podcherk.onclick = function() {
+  pokazat_html('<u>', '</u>', 'подчёркнутый');
+};
 
-function renderAsHTML(format) {
-  const textarea2 = document.getElementById('textarea2');
-  const text = textarea2.value.trim();
+// Dynamic element creation
+var schetchik = 0;
+btn_noviy.onclick = function() {
+  schetchik++;
+  var noviy_elem = document.createElement('div');
+  noviy_elem.className = 'dyn';
+  noviy_elem.textContent = 'Элемент №' + schetchik;
   
-  if (!text) {
-    alert('Пожалуйста, введите текст в поле 2');
-    return;
-  }
+  noviy_elem.onclick = function() {
+    zapisat_v_log('Клик по элементу №' + schetchik);
+  };
   
-  const outputBox = document.getElementById('outputBox');
-  let formatted = text;
+  noviy_elem.onmousedown = function() {
+    zapisat_v_log('onmousedown: элемент №' + schetchik);
+  };
   
-  switch(format) {
-    case 'bold':
-      formatted = '<b>' + text + '</b>';
-      break;
-    case 'italic':
-      formatted = '<i>' + text + '</i>';
-      break;
-    case 'underline':
-      formatted = '<u>' + text + '</u>';
-      break;
-  }
+  noviy_elem.onmouseup = function() {
+    zapisat_v_log('onmouseup: элемент №' + schetchik);
+  };
   
-  outputBox.innerHTML = 'Результат: ' + formatted;
-  logEvent('onclick', 'Применен формат: ' + format);
-}
-
-// === Динамическое создание элементов ===
-
-function createDynamicElement() {
-  dynamicCount++;
-  const container = document.getElementById('dynamicElements');
+  noviy_elem.onmouseleave = function() {
+    zapisat_v_log('onmouseleave: элемент №' + schetchik);
+  };
   
-  if (container.firstChild.textContent === 'Элементы появятся здесь...') {
-    container.innerHTML = '';
-  }
-  
-  const element = document.createElement('span');
-  element.className = 'dynamic-element';
-  element.textContent = 'Элемент ' + dynamicCount;
-  element.style.animation = 'fadeIn 0.5s ease-in-out';
-  
-  container.appendChild(element);
-  logEvent('onclick', 'Создан элемент #' + dynamicCount);
-}
-
-// === Журнал событий ===
-
-function logEvent(eventType, message) {
-  eventCount++;
-  const eventLog = document.getElementById('eventLog');
-  
-  if (eventLog.firstChild.textContent.includes('пуст')) {
-    eventLog.innerHTML = '';
-  }
-  
-  const timestamp = new Date().toLocaleTimeString('ru-RU');
-  const eventItem = document.createElement('div');
-  eventItem.className = 'event-item ' + eventType;
-  eventItem.textContent = '[' + timestamp + '] ' + eventType + ': ' + message;
-  
-  eventLog.insertBefore(eventItem, eventLog.firstChild);
-  
-  if (eventLog.children.length > 20) {
-    eventLog.removeChild(eventLog.lastChild);
-  }
-}
-
-function clearEventLog() {
-  const eventLog = document.getElementById('eventLog');
-  eventLog.innerHTML = '<div class="event-item" style="color: #999;">Журнал событий пуст. Взаимодействуй с элементами!</div>';
-  eventCount = 0;
-  logEvent('onclick', 'Журнал очищен');
-}
-
-// Добавляем анимацию для fade-in
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-  }
-`;
-document.head.appendChild(style);
+  zona.appendChild(noviy_elem);
+  zapisat_v_log('Создан новый элемент №' + schetchik);
+};

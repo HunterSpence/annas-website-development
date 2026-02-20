@@ -1,56 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Лаб 10 - События JavaScript</title>
-<link rel="stylesheet" href="css/normalize.css">
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ЛР-10 — Введение в JavaScript</title>
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-<h1>📟 Лаб 10 — События JavaScript</h1>
-<div class="container">
-<section>
-<div class="section-title">Демонстрация событий</div>
-<div id="events" class="event-demo">Кликните здесь для событий</div>
-<button id="btnHtml">Отправить форматирование</button>
-<div class="button-group">
-<button id="btnBold">Ж Жирный</button>
-<button id="btnItalic">К Курсив</button>
-<button id="btnUnderline">П Подчеркнутый</button>
-</div>
-<button id="btnAdd">+ Добавить элемент</button>
-<button id="btnClear">✖ Очистить</button>
-</section>
+  <header class="wrap">
+    <h1>Лабораторная работа 10 — Введение в JavaScript</h1>
+    <p class="muted">События: onclick, onmousedown, onmousemove, onmouseleave, onmouseup, onfocus, onblur</p>
+  </header>
+  <main class="wrap">
+    <section class="panel">
+      <!-- toolbar: 2 buttons, checkbox label, accent transfer button, spacer, 3 format buttons, create button -->
+      <div class="toolbar">
+        <button id="knopka1" class="btn">Кнопка 1</button>
+        <button id="knopka2" class="btn">Кнопка 2</button>
+        <label class="inline">
+          <input type="checkbox" id="chek_perenos">
+          Перенос из поля 1 в поле 2
+        </label>
+        <button id="btn_perenesti" class="btn btn-accent">Перенести</button>
+        <div class="spacer"></div>
+        <button id="btn_zhir" class="btn">Жирный</button>
+        <button id="btn_kursiv" class="btn">Курсив</button>
+        <button id="btn_podcherk" class="btn">Подчёркнутый</button>
+        <button id="btn_noviy" class="btn">Создать элемент</button>
+      </div>
 
-<section>
-<div class="section-title">Текстовые области</div>
-<div class="checkbox-group">
-<label>
-<input type="checkbox" id="swapDir"> Переводить в обратном направлении →
-</label>
-</div>
-<div>
-<div style="color:#a0a0a0;font-size:11px;margin-bottom:0.3rem">Исходный текст</div>
-<textarea id="text1" placeholder="Введите текст здесь..."></textarea>
-</div>
-<div>
-<div style="color:#a0a0a0;font-size:11px;margin-bottom:0.3rem">Целевой текст</div>
-<textarea id="text2" placeholder="Переведенный текст..."></textarea>
-</div>
-</section>
+      <!-- grid: 2 columns, each with h2 + textarea -->
+      <div class="grid">
+        <div>
+          <h2>Поле 1</h2>
+          <textarea id="pole1" class="ta" placeholder="Введите текст..."></textarea>
+        </div>
+        <div>
+          <h2>Поле 2</h2>
+          <textarea id="pole2" class="ta" placeholder="Второе поле..."></textarea>
+        </div>
+      </div>
 
-<section>
-<div class="section-title">Динамические элементы</div>
-<div id="dynamicContainer"></div>
-</section>
+      <!-- HTML output -->
+      <div class="out">
+        <h2>Вывод как HTML (b / i / u)</h2>
+        <div id="vyvod_html" class="htmlOut"></div>
+      </div>
 
-<section>
-<div class="section-title">Лог событий</div>
-<div id="log"></div>
-</section>
-</div>
+      <!-- Event log -->
+      <div class="logBlock">
+        <h2>Лог событий</h2>
+        <div id="log" class="log"></div>
+      </div>
 
-<script src="js/script.js"></script>
+      <!-- Dynamic area for mousemove/leave + created elements -->
+      <div id="zona" class="dynamicArea">
+        <h2>Зона для onmousemove / onmouseleave</h2>
+        <p class="muted">Наведите курсор на эту область, чтобы увидеть события движения мыши в логе</p>
+      </div>
+    </section>
+  </main>
+  <script src="./js/script.js"></script>
 </body>
 </html>

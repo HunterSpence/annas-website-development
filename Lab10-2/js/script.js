@@ -1,177 +1,155 @@
-// DOM Elements
-const textarea1 = document.getElementById('textarea1');
-const textarea2 = document.getElementById('textarea2');
-const transferToggle = document.getElementById('transferToggle');
-const transferBtn = document.getElementById('transferBtn');
-const boldBtn = document.getElementById('boldBtn');
-const italicBtn = document.getElementById('italicBtn');
-const underlineBtn = document.getElementById('underlineBtn');
-const formattedText = document.getElementById('formattedText');
-const createBtn = document.getElementById('createBtn');
-const dynamicContainer = document.getElementById('dynamicContainer');
-const eventLog = document.getElementById('eventLog');
-const clearLogBtn = document.getElementById('clearLogBtn');
-
-// Logging function
-function logEvent(eventType, element) {
-  const timestamp = new Date().toLocaleTimeString('ru-RU');
-  const entry = document.createElement('div');
-  entry.className = 'log-entry';
-  entry.textContent = `[${timestamp}] ${eventType}`;
-  eventLog.insertBefore(entry, eventLog.firstChild);
-  
-  // Keep only last 20 entries
-  while (eventLog.children.length > 20) {
-    eventLog.removeChild(eventLog.lastChild);
-  }
+// Кастомный селектор
+function $(id) {
+  return document.getElementById(id);
 }
 
-// Transfer text between textareas
-transferBtn.addEventListener('click', function() {
-  logEvent('onclick на кнопке переноса', this);
-  
-  if (transferToggle.checked) {
-    // Right to left
-    textarea1.value = textarea2.value;
-  } else {
-    // Left to right
-    textarea2.value = textarea1.value;
+// Запись событий в лог с временной меткой
+function zapisat_v_log(tekst) {
+  var log = $('log');
+  var zapis = document.createElement('div');
+  var vremya = new Date();
+  var chasy = String(vremya.getHours()).padStart(2, '0');
+  var minuty = String(vremya.getMinutes()).padStart(2, '0');
+  var sekundy = String(vremya.getSeconds()).padStart(2, '0');
+  zapis.textContent = '[' + chasy + ':' + minuty + ':' + sekundy + '] ' + tekst;
+  log.insertBefore(zapis, log.firstChild);
+}
+
+// Экранирование HTML-символов
+function ekraniruy_html(s) {
+  return s.replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+}
+
+// Получаем все элементы через кастомный селектор
+var knopka1 = $('knopka1');
+var knopka2 = $('knopka2');
+var chek_perenos = $('chek_perenos');
+var btn_perenesti = $('btn_perenesti');
+var btn_zhir = $('btn_zhir');
+var btn_kursiv = $('btn_kursiv');
+var btn_podcherk = $('btn_podcherk');
+var btn_noviy = $('btn_noviy');
+var pole1 = $('pole1');
+var pole2 = $('pole2');
+var vyvod_html = $('vyvod_html');
+var zona = $('zona');
+
+// Обработчики для knopka1 и knopka2
+knopka1.onclick = function() {
+  zapisat_v_log('Клик на Кнопка 1');
+};
+
+knopka2.onclick = function() {
+  zapisat_v_log('Клик на Кнопка 2');
+};
+
+// Обработчики onmousedown и onmouseup для кнопки переноса
+btn_perenesti.onmousedown = function() {
+  zapisat_v_log('Нажата кнопка мыши (onmousedown) на "Перенести"');
+};
+
+btn_perenesti.onmouseup = function() {
+  zapisat_v_log('Отпущена кнопка мыши (onmouseup) на "Перенести"');
+};
+
+// Обработчики onfocus и onblur для текстовых полей
+pole1.onfocus = function() {
+  zapisat_v_log('Фокус на Поле 1 (onfocus)');
+};
+
+pole1.onblur = function() {
+  zapisat_v_log('Потеря фокуса с Поля 1 (onblur)');
+};
+
+pole2.onfocus = function() {
+  zapisat_v_log('Фокус на Поле 2 (onfocus)');
+};
+
+pole2.onblur = function() {
+  zapisat_v_log('Потеря фокуса с Поля 2 (onblur)');
+};
+
+// Throttled onmousemove для зоны
+var posledneye_vremya = 0;
+zona.onmousemove = function(e) {
+  var teper = Date.now();
+  if (teper - posledneye_vremya >= 250) {
+    var x = e.clientX;
+    var y = e.clientY;
+    zapisat_v_log('onmousemove в зоне: x=' + x + ', y=' + y);
+    posledneye_vremya = teper;
   }
-});
+};
 
-// Textarea 1 events
-textarea1.addEventListener('focus', function() {
-  logEvent('onfocus на первую область', this);
-});
+// onmouseleave для зоны
+zona.onmouseleave = function() {
+  zapisat_v_log('Курсор покинул зону (onmouseleave)');
+};
 
-textarea1.addEventListener('blur', function() {
-  logEvent('onblur на первую область', this);
-});
+// Логика переноса текста между полями
+btn_perenesti.onclick = function() {
+  if (chek_perenos.checked) {
+    pole2.value = pole1.value;
+    zapisat_v_log('Текст перенесён из Поля 1 в Поле 2');
+  } else {
+    pole1.value = pole2.value;
+    zapisat_v_log('Текст перенесён из Поля 2 в Поле 1');
+  }
+};
 
-textarea1.addEventListener('mousedown', function() {
-  logEvent('onmousedown на первую область', this);
-});
+// Функция для отображения HTML с тегами форматирования
+function pokazat_html(otkr, zakr, tip) {
+  var tekst = pole1.value;
+  var ekranirovanniy = ekraniruy_html(tekst);
+  vyvod_html.innerHTML = otkr + ekranirovanniy + zakr;
+  zapisat_v_log('Применено форматирование: ' + tip);
+}
 
-textarea1.addEventListener('mousemove', function() {
-  // Throttle mousemove logging
-  this.dataset.lastMove = Date.now();
-});
+// Обработчики для кнопок форматирования
+btn_zhir.onclick = function() {
+  pokazat_html('<b>', '</b>', 'жирный (b)');
+};
 
-textarea1.addEventListener('mouseleave', function() {
-  logEvent('onmouseleave первую область', this);
-});
+btn_kursiv.onclick = function() {
+  pokazat_html('<i>', '</i>', 'курсив (i)');
+};
 
-textarea1.addEventListener('mouseup', function() {
-  logEvent('onmouseup на первую область', this);
-});
+btn_podcherk.onclick = function() {
+  pokazat_html('<u>', '</u>', 'подчёркнутый (u)');
+};
 
-// Textarea 2 events
-textarea2.addEventListener('focus', function() {
-  logEvent('onfocus на вторую область', this);
-});
+// Счётчик для динамических элементов
+var schetchik = 0;
 
-textarea2.addEventListener('blur', function() {
-  logEvent('onblur на вторую область', this);
-});
-
-textarea2.addEventListener('mousedown', function() {
-  logEvent('onmousedown на вторую область', this);
-});
-
-textarea2.addEventListener('mousemove', function() {
-  this.dataset.lastMove = Date.now();
-});
-
-textarea2.addEventListener('mouseleave', function() {
-  logEvent('onmouseleave вторую область', this);
-});
-
-textarea2.addEventListener('mouseup', function() {
-  logEvent('onmouseup на вторую область', this);
-});
-
-// Formatting buttons
-boldBtn.addEventListener('click', function() {
-  logEvent('onclick на кнопку "Жирный"', this);
-  const text = textarea1.value || 'Образец текста';
-  formattedText.innerHTML = `<b>${text}</b>`;
-});
-
-boldBtn.addEventListener('focus', function() {
-  logEvent('onfocus на кнопку "Жирный"', this);
-});
-
-boldBtn.addEventListener('blur', function() {
-  logEvent('onblur на кнопку "Жирный"', this);
-});
-
-italicBtn.addEventListener('click', function() {
-  logEvent('onclick на кнопку "Курсив"', this);
-  const text = textarea1.value || 'Образец текста';
-  formattedText.innerHTML = `<i>${text}</i>`;
-});
-
-italicBtn.addEventListener('focus', function() {
-  logEvent('onfocus на кнопку "Курсив"', this);
-});
-
-italicBtn.addEventListener('blur', function() {
-  logEvent('onblur на кнопку "Курсив"', this);
-});
-
-underlineBtn.addEventListener('click', function() {
-  logEvent('onclick на кнопку "Подчёркнутый"', this);
-  const text = textarea1.value || 'Образец текста';
-  formattedText.innerHTML = `<u>${text}</u>`;
-});
-
-underlineBtn.addEventListener('focus', function() {
-  logEvent('onfocus на кнопку "Подчёркнутый"', this);
-});
-
-underlineBtn.addEventListener('blur', function() {
-  logEvent('onblur на кнопку "Подчёркнутый"', this);
-});
-
-// Create dynamic element
-createBtn.addEventListener('click', function() {
-  logEvent('onclick на кнопку "Создать элемент"', this);
+// Создание нового динамического элемента
+btn_noviy.onclick = function() {
+  schetchik++;
+  var noviy_elem = document.createElement('div');
+  noviy_elem.className = 'dyn';
+  noviy_elem.textContent = 'Элемент #' + schetchik;
   
-  const element = document.createElement('div');
-  element.className = 'dynamic-element';
-  element.textContent = `Элемент #${dynamicContainer.children.length + 1}`;
+  var nomer = schetchik; // Сохраняем для замыкания
   
-  element.addEventListener('click', function() {
-    logEvent('onclick на динамический элемент', this);
-    this.remove();
-  });
+  noviy_elem.onclick = function() {
+    zapisat_v_log('Клик на Элемент #' + nomer);
+  };
   
-  element.addEventListener('mousedown', function() {
-    logEvent('onmousedown на динамический элемент', this);
-  });
+  noviy_elem.onmousedown = function() {
+    zapisat_v_log('Нажата кнопка мыши на Элементе #' + nomer);
+  };
   
-  element.addEventListener('mouseup', function() {
-    logEvent('onmouseup на динамический элемент', this);
-  });
+  noviy_elem.onmouseup = function() {
+    zapisat_v_log('Отпущена кнопка мыши на Элементе #' + nomer);
+  };
   
-  dynamicContainer.appendChild(element);
-});
-
-createBtn.addEventListener('focus', function() {
-  logEvent('onfocus на кнопку "Создать"', this);
-});
-
-createBtn.addEventListener('blur', function() {
-  logEvent('onblur на кнопку "Создать"', this);
-});
-
-// Clear log
-clearLogBtn.addEventListener('click', function() {
-  logEvent('onclick на кнопку "Очистить"', this);
-  eventLog.innerHTML = '';
-});
-
-// Initial event
-window.addEventListener('load', function() {
-  logEvent('⚡ Страница загружена', document);
-});
+  noviy_elem.onmouseleave = function() {
+    zapisat_v_log('Курсор покинул Элемент #' + nomer);
+  };
+  
+  zona.appendChild(noviy_elem);
+  zapisat_v_log('Создан новый элемент #' + schetchik);
+};
