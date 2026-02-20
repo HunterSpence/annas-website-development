@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>lab 10</title>
+    <meta name="description" content="JavaScript basics"/>
+    <meta name="keywords" content="javaScript, functions, события"/>
+    <meta name="author" content="Koriakina Sofia"/>
+    <meta name="robots" content="noindex, nofollow"/>
+    <link rel="stylesheet" href="../ccs/normalize.css"/>
+    <link rel="stylesheet" href="../ccs/style..css"/>
+    <script src="../js/funcs.js"></script>
+    <script>
+       // Задание 1:
+       /*
+        function f1(a,b){
+            let sum = a+b;
+            return sum;
+        }
+
+        let f = f1(7,10);
+        alert (f);
+
+        let f2 = new Function('a','b','return atb;');
+        alert (f2(3,4));
+        
+        let f3 = function(a, b){
+            return a+b;
+        }
+        alert(f3 (5,5));
+
+        let f4 = (a,b) =>a+b;
+        alert (f4(20, 30));
+        */
+
+    </script>
+</head>
+<body>
+    <!-- Задание 2-->
+     <input type="button"
+     value="Задание 2"
+     onmousedown="onMdown () "
+     onmouseleave="onMleave()"
+     onmousemove="onMmove () "/>
+    <!-- Задание 3-->
+| <input type ="button" value ="Задание 3.1" id="myButton1" onclick="task3_1()" />
+  <input type ="button" value ="Задание 3.2" id="myButton2" onclick="alert(ура);" />
+  <input type ="button" value ="Задание 3.3" id="myButton3"/>
+
+<script>
+document.getElementById("myButton3").onclick = task3_3;
+
+ </script>
+
+ <div class="toolbar">
+ <!--Задание 5: Создание элементов-->
+ <button id="btn1">Кнопка 1</button>
+ <button id="btn2">Кнопка 2</button>
+контейнер 1>
+контейнер 2">
+<input type="text" id="input2" placeholder="Текстовый контейнер 1">
+<span class="label">1 <_> 2</span>
+<input type="checkbox" id="transferCheck">
+<button id="boldBtn">Жирный текст</button>
+<button id="italicBtn">Курсивный текст</button>
+<button id="underBtn">Подчеркнутый текст</button>
+<button id="createElem"> Создать новый элемент</button>
+<button id="rewriteBtn">Переписать текст</button>
+</div>
+  <div id="displayArea" class="display-area">
+    </div>
+<body>
+<h2>Ввод текста: </h2>
+<textarea id="inputText" rows="4" cols="50"></textarea>
+
+<label>
+    <input type="checkbox" id="transferCheckbox"> Переносить текст
+</Label>
+
+
+<h2>Выходной текст:</h2>
+<textarea id="outputText" IoWs="4" cols="50" readonly></textarea>
+
+
+
+<label for="inputText">Введите текст:</label>
+    <textarea id="inputText"></textarea><br>
+    <button onclick="formatText()">Применить стили</button><br>
+    <div id="outputText"></div>
+</body>
+</html>

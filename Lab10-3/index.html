@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лаб 10 - Обработчики событий JavaScript</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main>
+    <h1>💻 Демонстрация событий JavaScript</h1>
+    
+    <h2>Демонстрация обработчиков событий мыши</h2>
+    <div class="event-demo" id="eventDemo">
+      Нажмите, перемещайте мышь, держите кнопку мыши
+    </div>
+
+    <h2>Работа с текстовыми полями</h2>
+    <div class="container">
+      <div class="section">
+        <h3 style="margin-top: 0;">Поле 1</h3>
+        <textarea id="textarea1" placeholder="Введите текст здесь..."></textarea>
+      </div>
+      <div class="section">
+        <h3 style="margin-top: 0;">Поле 2</h3>
+        <textarea id="textarea2" placeholder="Результат появится здесь..."></textarea>
+      </div>
+    </div>
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="transferDir" checked>
+      <label for="transferDir">Копировать из Поля 1 → Поле 2</label>
+    </div>
+
+    <h2>Форматирование текста в HTML</h2>
+    <div class="buttons-group">
+      <button id="boldBtn">Жирный текст</button>
+      <button id="italicBtn">Курсив</button>
+      <button id="underlineBtn">Подчеркивание</button>
+    </div>
+
+    <h2>Динамическое создание элементов</h2>
+    <button id="createBtn" style="margin-bottom: 20px;">+ Создать новый элемент</button>
+    <div class="dynamic-container" id="dynamicContainer">
+      <p style="text-align: center; color: #999; margin: 0;">Элементы будут появляться здесь</p>
+    </div>
+
+    <h2>Журнал событий</h2>
+    <div class="event-log" id="eventLog"></div>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

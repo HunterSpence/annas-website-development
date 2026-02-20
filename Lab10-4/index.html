@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лаб 10 - События JavaScript</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🌿 Лаб 10 - События JavaScript 🌿</h1>
+
+    <!-- Раздел 1: События мыши -->
+    <div class="section">
+      <h2>События Мыши</h2>
+      <div class="demo-box">
+        <button id="clickBtn" onclick="handleClick(event)">Нажми (onclick)</button>
+        <button id="mouseDownBtn" onmousedown="handleMouseDown(event)">Зажми (onmousedown)</button>
+        <button id="mouseUpBtn" onmouseup="handleMouseUp(event)">Отпусти (onmouseup)</button>
+      </div>
+      <div id="mouseArea" onmousemove="handleMouseMove(event)" onmouseleave="handleMouseLeave(event)" 
+           style="background: white; border: 2px solid #8cb342; border-radius: 8px; padding: 20px; height: 80px; display: flex; align-items: center; justify-content: center; color: #4a7c2f; font-weight: bold; margin: 15px 0;">
+        Наведи мышь сюда (onmousemove / onmouseleave)
+      </div>
+    </div>
+
+    <!-- Раздел 2: События фокуса -->
+    <div class="section">
+      <h2>События Фокуса</h2>
+      <div class="demo-box">
+        <input type="text" id="focusInput" onfocus="handleFocus(event)" onblur="handleBlur(event)" 
+               placeholder="Кликни на поле (onfocus / onblur)" style="flex: 1; padding: 10px; border: 2px solid #4a7c2f; border-radius: 8px;">
+      </div>
+    </div>
+
+    <!-- Раздел 3: Передача текста между текстареями -->
+    <div class="section">
+      <h2>Передача Текста</h2>
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" id="transferCheckbox" onchange="updateTransferDirection()">
+          <span id="transferLabel">Текст слева → направо</span>
+        </label>
+      </div>
+      <div class="textareas-wrapper">
+        <div class="textarea-group">
+          <label for="textarea1">Текстовое поле 1:</label>
+          <textarea id="textarea1" placeholder="Введите текст здесь..."></textarea>
+        </div>
+        <div class="textarea-group">
+          <label for="textarea2">Текстовое поле 2:</label>
+          <textarea id="textarea2" placeholder="Текст появится здесь..."></textarea>
+        </div>
+      </div>
+      <button onclick="transferText()">Передать текст</button>
+    </div>
+
+    <!-- Раздел 4: Форматирование текста -->
+    <div class="section">
+      <h2>Форматирование Текста</h2>
+      <div class="controls">
+        <button onclick="renderAsHTML('bold')"><b>Жирный</b> (&lt;b&gt;)</button>
+        <button onclick="renderAsHTML('italic')"><i>Наклонный</i> (&lt;i&gt;)</button>
+        <button onclick="renderAsHTML('underline')"><u>Подчеркнутый</u> (&lt;u&gt;)</button>
+      </div>
+      <div id="outputBox" class="output-box">Выбери текстовое поле 2 и нажми кнопку форматирования</div>
+    </div>
+
+    <!-- Раздел 5: Динамическое создание элементов -->
+    <div class="section">
+      <h2>Динамические Элементы</h2>
+      <button onclick="createDynamicElement()">Создать новый элемент</button>
+      <div id="dynamicElements" class="dynamic-elements">
+        <span style="color: #999; font-style: italic;">Элементы появятся здесь...</span>
+      </div>
+    </div>
+
+    <!-- Раздел 6: Журнал событий -->
+    <div class="section">
+      <h2>Журнал Событий</h2>
+      <button onclick="clearEventLog()">Очистить журнал</button>
+      <div id="eventLog" class="event-log">
+        <div class="event-item" style="color: #999;">Журнал событий пуст. Взаимодействуй с элементами!</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

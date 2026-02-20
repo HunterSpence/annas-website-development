@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ЛР-10 — Введение в JavaScript</title>
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <header class="wrap">
+    <h1>Лабораторная работа 10 — Введение в JavaScript</h1>
+    <p class="muted">События: onclick, onmousedown, onmousemove, onmouseleave, onmouseup, onfocus, onblur</p>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <div class="toolbar">
+        <button id="knopka1" class="btn" type="button">Кнопка 1</button>
+        <button id="knopka2" class="btn" type="button">Кнопка 2</button>
+
+        <label class="inline">
+          <input id="chek_perenos" type="checkbox">
+          <span>Перенос 1 → 2 (если выключено: 2 → 1)</span>
+        </label>
+
+        <button id="btn_perenesti" class="btn btn-accent" type="button">Переписать текст</button>
+
+        <span class="spacer"></span>
+
+        <button id="btn_zhir" class="btn" type="button">Жирный</button>
+        <button id="btn_kursiv" class="btn" type="button">Курсив</button>
+        <button id="btn_podcherk" class="btn" type="button">Подчёркнутый</button>
+
+        <button id="btn_noviy" class="btn" type="button">Создать новый элемент</button>
+      </div>
+
+      <div class="grid">
+        <div class="col">
+          <h2>Окошко ввода 1</h2>
+          <textarea id="pole1" class="ta" placeholder="Введите текст в окошко 1..."></textarea>
+        </div>
+
+        <div class="col">
+          <h2>Окошко ввода 2</h2>
+          <textarea id="pole2" class="ta" placeholder="Введите текст в окошко 2..."></textarea>
+        </div>
+      </div>
+
+      <div class="out">
+        <h2>Вывод как HTML (b / i / u)</h2>
+        <div id="vyvod_html" class="htmlOut">Здесь появится результат…</div>
+      </div>
+
+      <div class="logBlock">
+        <h2>Лог событий</h2>
+        <div id="log" class="log" aria-live="polite"></div>
+      </div>
+
+      <div id="zona" class="dynamicArea">
+        <h2>Зона для onmousemove / onmouseleave</h2>
+        <p class="muted">Двигайте мышь внутри зоны и выйдите за её границы.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="./js/script.js"></script>
+</body>
+</html>

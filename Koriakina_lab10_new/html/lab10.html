@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторная работа 10 - JavaScript</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Лабораторная работа 10</h1>
+            <p>Введение в JavaScript</p>
+            <p class="student">Студент: Корякина Анна</p>
+        </header>
+
+        <section class="section">
+            <h2>События мыши и фокуса</h2>
+            <button id="btn-click" class="btn">Нажми меня (onclick)</button>
+            <button id="btn-mouse" class="btn">Двигай мышь</button>
+            <input id="input-focus" type="text" placeholder="Фокус (onfocus/onblur)">
+            <p id="event-log">События: <span></span></p>
+        </section>
+
+        <section class="section">
+            <h2>Перенос текста с чекбоксом</h2>
+            <div class="textareas">
+                <div>
+                    <label>Исходный текст:</label>
+                    <textarea id="from-text" placeholder="Введите текст...">Привет, мир!</textarea>
+                </div>
+                <div class="checkbox-wrap">
+                    <label>
+                        <input type="checkbox" id="transfer-check">
+                        Перенести
+                    </label>
+                </div>
+                <div>
+                    <label>Результат:</label>
+                    <textarea id="to-text" readonly placeholder="Текст появится здесь"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Форматирование текста</h2>
+            <div class="format-controls">
+                <button class="format-btn" data-format="bold">Жирный</button>
+                <button class="format-btn" data-format="italic">Курсив</button>
+                <button class="format-btn" data-format="underline">Подчёркнутый</button>
+            </div>
+            <textarea id="format-input" placeholder="Введите текст для форматирования..."></textarea>
+            <div id="format-output" class="output-box"></div>
+        </section>
+
+        <section class="section">
+            <h2>Создание элементов</h2>
+            <button id="btn-create" class="btn">Создать элемент</button>
+            <div id="elements-zone" class="elements-zone"></div>
+        </section>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
