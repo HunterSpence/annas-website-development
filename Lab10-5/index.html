@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторная работа 10 - Введение в JavaScript</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Лабораторная работа 10: Введение в JavaScript</h1>
+
+        <!-- Section 1: Event Handler Demonstrations -->
+        <section class="section">
+            <h2>1. Демонстрация обработчиков событий</h2>
+            <p>Взаимодействуйте с кнопкой ниже, чтобы вызвать различные события:</p>
+
+            <button
+                id="eventButton"
+                class="demo-button"
+                onclick="handleClick()"
+                onmousedown="handleMouseDown()"
+                onmousemove="handleMouseMove()"
+                onmouseleave="handleMouseLeave()"
+                onmouseup="handleMouseUp()"
+            >
+                Демонстрационная кнопка событий
+            </button>
+
+            <div id="eventLog" class="event-log">
+                <strong>Журнал событий:</strong>
+                <div id="eventLogContent"></div>
+            </div>
+        </section>
+
+        <!-- Section 2: Focus/Blur Events -->
+        <section class="section">
+            <h2>2. События фокуса и потери фокуса</h2>
+            <p>Кликните в поле ввода, затем кликните снаружи:</p>
+
+            <input
+                type="text"
+                id="focusInput"
+                class="text-input"
+                placeholder="Кликните здесь для фокуса..."
+                onfocus="handleFocus()"
+                onblur="handleBlur()"
+            >
+
+            <div id="focusLog" class="focus-log"></div>
+        </section>
+
+        <!-- Section 3: Text Transfer with Checkbox -->
+        <section class="section">
+            <h2>3. Перенос текста между полями ввода</h2>
+            <p>Введите текст в первое поле, отметьте флажок, чтобы перенести его во второе поле:</p>
+
+            <div class="input-group">
+                <label for="sourceInput">Исходный текст:</label>
+                <input
+                    type="text"
+                    id="sourceInput"
+                    class="text-input"
+                    placeholder="Введите что-нибудь здесь..."
+                >
+            </div>
+
+            <div class="checkbox-group">
+                <input
+                    type="checkbox"
+                    id="transferCheckbox"
+                    onclick="transferText()"
+                >
+                <label for="transferCheckbox">Перенести текст в назначение</label>
+            </div>
+
+            <div class="input-group">
+                <label for="destInput">Текст назначения:</label>
+                <input
+                    type="text"
+                    id="destInput"
+                    class="text-input"
+                    placeholder="Текст появится здесь..."
+                    readonly
+                >
+            </div>
+        </section>
+
+        <!-- Section 4: Text Formatting Display -->
+        <section class="section">
+            <h2>4. Отображение форматирования текста</h2>
+            <p>Введите текст и увидите его отображение жирным, курсивом и подчёркнутым:</p>
+
+            <div class="input-group">
+                <label for="formatInput">Введите текст:</label>
+                <input
+                    type="text"
+                    id="formatInput"
+                    class="text-input"
+                    placeholder="Введите текст для форматирования..."
+                    oninput="updateFormattedText()"
+                >
+            </div>
+
+            <div class="formatted-output">
+                <div class="format-display">
+                    <strong>Жирный:</strong> <span id="boldText" class="bold-text"></span>
+                </div>
+                <div class="format-display">
+                    <strong>Курсив:</strong> <span id="italicText" class="italic-text"></span>
+                </div>
+                <div class="format-display">
+                    <strong>Подчёркнутый:</strong> <span id="underlineText" class="underline-text"></span>
+                </div>
+                <div class="format-display">
+                    <strong>Всё вместе:</strong> <span id="combinedText" class="combined-text"></span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

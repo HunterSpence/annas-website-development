@@ -1,0 +1,312 @@
+/* ============================================
+   Lab 10 - JavaScript Event Handlers
+   Main Stylesheet
+   ============================================ */
+
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --success-color: #48bb78;
+    --warning-color: #ed8936;
+    --text-dark: #2d3748;
+    --text-light: #718096;
+    --bg-light: #f7fafc;
+    --bg-white: #ffffff;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
+    --shadow-lg: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    min-height: 100vh;
+    padding: 2rem;
+    margin: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+/* ============================================
+   Section Styling
+   ============================================ */
+
+.section {
+    background: var(--bg-white);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.3s ease;
+}
+
+.section:hover {
+    transform: translateY(-2px);
+}
+
+.section h2 {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.section p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+/* ============================================
+   Button Styling
+   ============================================ */
+
+.demo-button {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary-color);
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.demo-button:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.demo-button:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+   Event Log Styling
+   ============================================ */
+
+.event-log {
+    margin-top: 1.5rem;
+    background: #1a202c;
+    padding: 1rem;
+    border-radius: 8px;
+    min-height: 100px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.event-log strong {
+    color: #68d391;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: 'Courier New', monospace;
+}
+
+#eventLogContent {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+}
+
+.log-entry {
+    padding: 6px 0;
+    border-bottom: 1px solid #2d3748;
+    color: #e2e8f0;
+}
+
+.log-number {
+    color: #68d391;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.log-time {
+    color: #90cdf4;
+    margin-right: 8px;
+}
+
+.log-event {
+    color: #fbbf24;
+    font-weight: bold;
+}
+
+/* ============================================
+   Input Styling
+   ============================================ */
+
+.text-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.text-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.text-input::placeholder {
+    color: var(--text-light);
+}
+
+.text-input[readonly] {
+    background-color: var(--bg-light);
+    cursor: not-allowed;
+}
+
+/* ============================================
+   Focus/Blur Log Styling
+   ============================================ */
+
+.focus-log {
+    margin-top: 1rem;
+    padding: 12px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    min-height: 40px;
+    transition: all 0.3s ease;
+}
+
+.focus-log.focused {
+    background: #c6f6d5;
+    color: #22543d;
+    border-left: 4px solid var(--success-color);
+}
+
+.focus-log.blurred {
+    background: #fed7d7;
+    color: #742a2a;
+    border-left: 4px solid #fc8181;
+}
+
+/* ============================================
+   Input Groups and Checkbox
+   ============================================ */
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+.checkbox-group {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: var(--bg-light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.checkbox-group label {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+/* ============================================
+   Formatted Text Output
+   ============================================ */
+
+.formatted-output {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: var(--bg-light);
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+}
+
+.format-display {
+    padding: 10px;
+    margin-bottom: 10px;
+    background: white;
+    border-radius: 6px;
+    font-size: 18px;
+}
+
+.format-display strong {
+    color: var(--text-light);
+    font-size: 14px;
+    display: inline-block;
+    min-width: 100px;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.italic-text {
+    font-style: italic;
+}
+
+.underline-text {
+    text-decoration: underline;
+}
+
+.combined-text {
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .section {
+        padding: 1.5rem;
+    }
+
+    .demo-button {
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+}
